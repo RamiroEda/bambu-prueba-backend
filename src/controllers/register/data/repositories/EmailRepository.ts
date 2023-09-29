@@ -1,10 +1,10 @@
-import { injectable } from "tsyringe";
+import { singleton } from "tsyringe";
 import nodemailer from "nodemailer";
 import { SMTP_EMAIL, SMTP_HOST, SMTP_PASSWORD } from "../../../../constants";
 
-@injectable()
+@singleton()
 export class EmailRepository {
-  transporter = nodemailer.createTransport({
+  private transporter = nodemailer.createTransport({
     host: SMTP_HOST,
     port: 587,
     auth: {

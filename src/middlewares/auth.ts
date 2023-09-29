@@ -1,7 +1,10 @@
-import { injectable } from "tsyringe";
+import jwt from "jsonwebtoken";
+import { autoInjectable, injectable } from "tsyringe";
 import { IMiddleware } from "../models/IMiddleware";
 import { Request, Response, NextFunction } from "express";
+import { JWT_SECRET } from "../constants";
 
+@autoInjectable()
 export class AuthMiddleware implements IMiddleware {
   handle(
     req: Request,
@@ -12,7 +15,13 @@ export class AuthMiddleware implements IMiddleware {
     const [tokenType, token]: (string | undefined)[] =
       authHeader?.split(" ") ?? [];
 
-    console.log("authMiddleware");
-    next();
+    try {
+      const verified = jwt.verify(token, JWT_SECRET);
+
+      if (!verified) throw new Error("Invalid token");
+      next();
+    } catch (err) {
+      res.status(401).json({ message: "Unauthorized" });
+    }
   }
 }

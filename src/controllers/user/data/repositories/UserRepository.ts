@@ -1,9 +1,9 @@
 import { Prisma } from "@prisma/client";
-import { injectable } from "tsyringe";
+import { singleton } from "tsyringe";
 import prisma from "../../../../lib/prisma";
 import bcrypt from "bcrypt";
 
-@injectable()
+@singleton()
 export class UserRepository {
   create({ password, ...data }: Prisma.UserCreateInput) {
     return prisma.user.create({
@@ -11,6 +11,15 @@ export class UserRepository {
         ...data,
         password: bcrypt.hashSync(password, 10),
       },
+    });
+  }
+
+  update(id: number, data: Prisma.UserUpdateInput) {
+    return prisma.user.update({
+      where: {
+        id,
+      },
+      data,
     });
   }
 
