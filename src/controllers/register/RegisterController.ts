@@ -7,6 +7,9 @@ import Joi from "joi";
 import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../constants";
 
+/**
+ * Controlador para el registro de usuarios.
+ */
 @autoInjectable()
 export class RegisterController extends IController {
   constructor(
@@ -26,6 +29,9 @@ export class RegisterController extends IController {
     });
   }
 
+  /**
+   * Registra un usuario.
+   */
   async register(req: Request, res: Response) {
     const { email, password, name } = req.body;
 

@@ -1,3 +1,7 @@
+/**
+ * Este archivo contiene las constantes de la aplicación.
+ */
+
 require("dotenv").config();
 
 export const SMTP_EMAIL = process.env.SMTP_EMAIL;

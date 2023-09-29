@@ -5,6 +5,9 @@ import { AuthMiddleware } from "../../middlewares/auth";
 import { UserRepository } from "./data/repositories/UserRepository";
 import { Request, Response } from "express";
 
+/**
+ * Controlador para la gestión de usuarios.
+ */
 @autoInjectable()
 export class UserController extends IController {
   constructor(private userRepository: UserRepository) {
@@ -17,6 +20,9 @@ export class UserController extends IController {
     });
   }
 
+  /**
+   * Obtiene el usuario actual.
+   */
   async currentUser(req: Request, res: Response) {
     const token = req.headers.authorization?.split(" ")[1] ?? "";
     const decoded = jwt.decode(token) as

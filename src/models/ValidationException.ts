@@ -2,6 +2,9 @@ import { Response } from "express";
 import Joi from "joi";
 import { IS_PRODUCTION } from "../constants";
 
+/**
+ * Retorna un error de validación de Joi en formato JSON al cliente.
+ */
 export function throwValidationError(
   res: Response,
   errors: Joi.ValidationError

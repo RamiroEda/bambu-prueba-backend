@@ -4,6 +4,9 @@ import { throwValidationError } from "./ValidationException";
 import Joi from "joi";
 import { container } from "tsyringe";
 
+/**
+ * Interfaz que define un handler de un controlador.
+ */
 interface Handler {
   path: string;
   handler: (req: Request, res: Response) => any;
@@ -12,13 +15,27 @@ interface Handler {
   bodySchema?: Joi.Schema;
 }
 
+/**
+ * Interfaz que deben implementar todos los controladores.
+ */
 export abstract class IController {
+  /**
+   * Lista de handlers registrados en el controlador.
+   */
   private handlersRegistry: Handler[] = [];
 
+  /**
+   * Registra un handler en el controlador para que sea registrado en la aplicación de Express.
+   * @param handler Handler a registrar.
+   */
   protected registerHandler(handler: Handler): void {
     this.handlersRegistry.push(handler);
   }
 
+  /**
+   * Registra todos los handlers del controlador en la aplicación de Express.
+   * @param app Aplicación de Express.
+   */
   registerIn(app: Express): void {
     this.handlersRegistry.forEach((handler) => {
       const middlewares =
@@ -42,6 +59,9 @@ export abstract class IController {
     });
   }
 
+  /**
+   * Devuelve una representación en string del controlador. Útil para mostrar información de los handlers registrados.
+   */
   toString(): string {
     return this.handlersRegistry.map((h) => h.path).join("\n");
   }

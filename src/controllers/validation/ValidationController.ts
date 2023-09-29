@@ -5,6 +5,9 @@ import jwt from "jsonwebtoken";
 import { JWT_SECRET } from "../../constants";
 import { UserRepository } from "../user/data/repositories/UserRepository";
 
+/**
+ * Controlador para la validación de datos.
+ */
 @injectable()
 export class ValidationController extends IController {
   constructor(private userRepository: UserRepository) {
@@ -16,6 +19,9 @@ export class ValidationController extends IController {
     });
   }
 
+  /**
+   * Valida el token de verificación de email.
+   */
   async verifyEmail(req: Request, res: Response) {
     const { token } = req.params;
 

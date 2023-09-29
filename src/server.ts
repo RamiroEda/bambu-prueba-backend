@@ -3,16 +3,32 @@ import { container, injectable } from "tsyringe";
 import { IMiddleware } from "./models/IMiddleware";
 import { IController } from "./models/IController";
 
+/**
+ * @param port Puerto en el que se va a levantar el servidor
+ * @param middlewares Middlewares globales
+ * @param controllers Controladores
+ */
 interface ServerOptions {
   port?: number;
   middlewares?: { new (...args: any): IMiddleware }[];
   controllers?: { new (...args: any): IController }[];
 }
 
+/**
+ * Servidor de express
+ */
 @injectable()
 export class Server {
+  /**
+   * Aplicación de express
+   */
   private app = express();
 
+  /**
+   * Inicia el servidor con las opciones dadas
+   * @param options Opciones de configuración
+   * @returns Instancia del servidor
+   */
   static async start(options: ServerOptions = {}) {
     const server = new Server();
 

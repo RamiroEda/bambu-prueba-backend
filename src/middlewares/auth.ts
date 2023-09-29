@@ -4,6 +4,9 @@ import { IMiddleware } from "../models/IMiddleware";
 import { Request, Response, NextFunction } from "express";
 import { JWT_SECRET } from "../constants";
 
+/**
+ * Middleware que verifica que el token de autorización sea válido.
+ */
 @autoInjectable()
 export class AuthMiddleware implements IMiddleware {
   handle(

@@ -6,6 +6,9 @@ import { ValidationController } from "./controllers/validation/ValidationControl
 import { UserController } from "./controllers/user/UserController";
 import { PORT } from "./constants";
 
+/**
+ * Funcion principal
+ */
 function main() {
   try {
     Server.start({
