@@ -30,17 +30,17 @@ export class Server {
 
     if (options.controllers) {
       console.log("Loading controllers...");
+      const instances = options.controllers.map((it) => new it());
+
       console.table(
-        options.controllers.reduce((acc, m) => {
-          const instance = new m();
-          acc[m.name] = instance.toString();
+        instances.reduce((acc, m, index) => {
+          acc[options.controllers?.[index].name ?? ""] = m.toString();
           return acc;
         }, {} as any)
       );
 
-      options.controllers.forEach((controller) => {
-        const instance = new controller();
-        instance.registerIn(server.app);
+      instances.forEach((controller) => {
+        controller.registerIn(server.app);
       });
     }
 
