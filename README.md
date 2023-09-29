@@ -35,7 +35,7 @@ This endpoint allows you to verify a user's email. It requires the following dat
 
 - `token`: The token sent to the user's email
 
-#### POST /current-user
+#### GET /current-user
 
 This endpoint allows you to get the current user's data.
 
