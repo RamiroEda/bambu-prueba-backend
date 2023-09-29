@@ -6,3 +6,5 @@ export const SMTP_HOST = process.env.SMTP_HOST;
 export const SMTP_PORT = process.env.SMTP_PORT;
 
 export const JWT_SECRET = process.env.JWT_SECRET;
+
+export const IS_PRODUCTION = process.env.NODE_ENV === "production";

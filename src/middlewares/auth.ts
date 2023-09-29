@@ -1,5 +1,5 @@
 import { injectable } from "tsyringe";
-import { IMiddleware } from "../models/middleware";
+import { IMiddleware } from "../models/IMiddleware";
 import { Request, Response, NextFunction } from "express";
 
 export class AuthMiddleware implements IMiddleware {

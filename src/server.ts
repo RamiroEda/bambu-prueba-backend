@@ -1,7 +1,7 @@
 import express from "express";
 import { container, injectable } from "tsyringe";
-import { IMiddleware } from "./models/middleware";
-import { IController } from "./models/controller";
+import { IMiddleware } from "./models/IMiddleware";
+import { IController } from "./models/IController";
 
 interface ServerOptions {
   port?: number;
