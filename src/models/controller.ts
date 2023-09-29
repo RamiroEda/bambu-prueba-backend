@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response, Express } from "express";
+import { Request, Response, Express } from "express";
 
 interface Handler {
   path: string;
-  router: any;
+  router: (req: Request, res: Response) => any;
 }
 
 export abstract class IController {
@@ -16,5 +16,9 @@ export abstract class IController {
     this.handlersRegistry.forEach((handler) => {
       app.use(handler.path, handler.router);
     });
+  }
+
+  toString(): string {
+    return this.handlersRegistry.map((h) => h.path).join("\n");
   }
 }

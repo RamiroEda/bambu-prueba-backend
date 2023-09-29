@@ -2,7 +2,6 @@ import { injectable } from "tsyringe";
 import { IMiddleware } from "../models/middleware";
 import { Request, Response, NextFunction } from "express";
 
-@injectable()
 export class AuthMiddleware implements IMiddleware {
   handle(
     req: Request,

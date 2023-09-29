@@ -1,9 +1,15 @@
 import "reflect-metadata";
 import { Server } from "./server";
+import { AuthMiddleware } from "./middlewares/auth";
+import { RegisterController } from "./controllers/RegisterController";
 
 function main() {
   try {
-    Server.start();
+    Server.start({
+      port: 3000,
+      middlewares: [AuthMiddleware],
+      controllers: [RegisterController],
+    });
   } catch (e) {
     console.error(e);
   }
