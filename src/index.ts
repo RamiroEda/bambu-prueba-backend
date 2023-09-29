@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import { Server } from "./server";
 import { AuthMiddleware } from "./middlewares/auth";
-import { RegisterController } from "./controllers/RegisterController";
+import { RegisterController } from "./controllers/register/RegisterController";
 
 function main() {
   try {

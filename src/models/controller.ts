@@ -8,7 +8,7 @@ interface Handler {
 export abstract class IController {
   private handlersRegistry: Handler[] = [];
 
-  protected register(handler: Handler): void {
+  protected registerHandler(handler: Handler): void {
     this.handlersRegistry.push(handler);
   }
 

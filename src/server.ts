@@ -1,12 +1,12 @@
 import express from "express";
-import { injectable } from "tsyringe";
+import { container, injectable } from "tsyringe";
 import { IMiddleware } from "./models/middleware";
 import { IController } from "./models/controller";
 
 interface ServerOptions {
   port?: number;
-  middlewares?: { new (): IMiddleware }[];
-  controllers?: { new (): IController }[];
+  middlewares?: { new (...args: any): IMiddleware }[];
+  controllers?: { new (...args: any): IController }[];
 }
 
 @injectable()
@@ -24,13 +24,13 @@ export class Server {
       console.table(options.middlewares.map((m) => m.name));
 
       options.middlewares.forEach((middleware) => {
-        server.app.use(new middleware().handle);
+        server.app.use(container.resolve(middleware).handle);
       });
     }
 
     if (options.controllers) {
       console.log("Loading controllers...");
-      const instances = options.controllers.map((it) => new it());
+      const instances = options.controllers.map((it) => container.resolve(it));
 
       console.table(
         instances.reduce((acc, m, index) => {
