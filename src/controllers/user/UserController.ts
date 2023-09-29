@@ -17,7 +17,7 @@ export class UserController extends IController {
     });
   }
 
-  currentUser(req: Request, res: Response) {
+  async currentUser(req: Request, res: Response) {
     const token = req.headers.authorization?.split(" ")[1] ?? "";
     const decoded = jwt.decode(token) as
       | (jwt.JwtPayload & {
@@ -26,12 +26,17 @@ export class UserController extends IController {
         })
       | null;
 
-    if (!decoded) res.status(401).json({ message: "Invalid token" });
+    if (!decoded) return res.status(401).json({ message: "Invalid token" });
 
-    const user = this.userRepository.findByEmail(decoded?.email ?? "");
+    console.log(decoded);
 
-    if (!user) res.status(404).json({ message: "User not found" });
+    const user = await this.userRepository.findByEmail(decoded?.email ?? "");
 
-    res.json(user);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    res.status(200).json({
+      ...user,
+      password: undefined,
+    });
   }
 }

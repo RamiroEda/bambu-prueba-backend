@@ -53,7 +53,10 @@ export class RegisterController extends IController {
       `
       <h1>Welcome ${user.name}!</h1>
       <p>Click <a href="http://localhost:3000/verify-email/${verificationToken}">here</a> to verify your email.</p>
+      Use this token for future request: ${verificationToken}
     `
     );
+
+    res.status(200).json({ message: "User created" });
   }
 }

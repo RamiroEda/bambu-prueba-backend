@@ -37,7 +37,7 @@ export class ValidationController extends IController {
         isVerified: true,
       });
 
-      res.json({ message: "Email verified" });
+      res.json({ message: "Email verified succesfully!" });
     } catch (err) {
       res.status(401).json({ message: "Invalid token" });
     }
