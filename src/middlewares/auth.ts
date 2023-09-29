@@ -1,14 +1,19 @@
-import { NextFunction, Request, Response } from "express";
+import { injectable } from "tsyringe";
+import { IMiddleware } from "../models/middleware";
+import { Request, Response, NextFunction } from "express";
 
-export function authMiddleware(
-  req: Request,
-  res: Response,
-  next: NextFunction
-) {
-  const authHeader = req.headers.authorization;
-  const [tokenType, token]: (string | undefined)[] =
-    authHeader?.split(" ") ?? [];
+@injectable()
+export class AuthMiddleware implements IMiddleware {
+  handle(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): void | Promise<void> {
+    const authHeader = req.headers.authorization;
+    const [tokenType, token]: (string | undefined)[] =
+      authHeader?.split(" ") ?? [];
 
-  console.log("authMiddleware");
-  next();
+    console.log("authMiddleware");
+    next();
+  }
 }

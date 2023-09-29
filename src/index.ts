@@ -1,12 +1,12 @@
-import express from "express";
-import { authMiddleware } from "./middlewares/auth";
+import "reflect-metadata";
+import { Server } from "./server";
 
-const app = express();
+function main() {
+  try {
+    Server.start();
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(authMiddleware);
-
-app.post("/register", (req, res) => {
-  res.send("Hello World!");
-});
+main();
